@@ -1,0 +1,772 @@
+/* ============================================================
+   LIFE DASHBOARD — style.css
+   ============================================================ */
+
+/* ---------- CSS Variables (Themes) ---------- */
+:root {
+  --bg-page: #4a3d8f;
+  --bg-page-2: #6b4fa0;
+  --card-bg: #ffffff;
+  --card-shadow: 0 8px 32px rgba(60, 40, 120, 0.18);
+  --text-primary: #1a1a2e;
+  --text-secondary: #5a5a7a;
+  --text-muted: #9090aa;
+  --accent: #6c63ff;
+  --accent-hover: #574fd6;
+  --accent-light: #ede9ff;
+  --danger: #e74c3c;
+  --danger-hover: #c0392b;
+  --success: #2ecc71;
+  --warning: #f39c12;
+  --border: #e8e8f0;
+  --input-bg: #f7f7fc;
+  --timer-bg: #f0edff;
+  --greeting-gradient: linear-gradient(135deg, #6c63ff 0%, #a78bfa 100%);
+  --mode-tab-bg: #f0edff;
+  --mode-tab-active: #6c63ff;
+  --mode-tab-active-text: #fff;
+  --progress-bg: #e0daf7;
+  --progress-fill: #6c63ff;
+  --link-btn-bg: #f0edff;
+  --link-btn-border: #d4cef7;
+  --link-btn-text: #4a3d8f;
+  --todo-done-text: #aaa;
+  --toggle-bg: #ffffff22;
+}
+
+[data-theme="dark"] {
+  --bg-page: #14112b;
+  --bg-page-2: #1e1840;
+  --card-bg: #1f1c3a;
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --text-primary: #e8e8f8;
+  --text-secondary: #a0a0c0;
+  --text-muted: #6060a0;
+  --accent: #7c6fff;
+  --accent-hover: #9b8fff;
+  --accent-light: #2a245a;
+  --danger: #ff6b6b;
+  --danger-hover: #ee4444;
+  --success: #45e083;
+  --warning: #ffc048;
+  --border: #2e2a52;
+  --input-bg: #16132e;
+  --timer-bg: #16132e;
+  --greeting-gradient: linear-gradient(135deg, #3b34a0 0%, #6b4fa0 100%);
+  --mode-tab-bg: #16132e;
+  --mode-tab-active: #7c6fff;
+  --mode-tab-active-text: #fff;
+  --progress-bg: #2a245a;
+  --progress-fill: #7c6fff;
+  --link-btn-bg: #16132e;
+  --link-btn-border: #2e2a52;
+  --link-btn-text: #c0b8ff;
+  --todo-done-text: #555575;
+  --toggle-bg: #ffffff11;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-page-2) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: background 0.4s ease, color 0.3s ease;
+  padding: 20px 16px 40px;
+}
+
+/* ---------- Theme Toggle Button ---------- */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 999;
+  background: var(--toggle-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(12deg);
+}
+
+/* ---------- Dashboard Layout ---------- */
+.dashboard-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- Base Card ---------- */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: var(--card-shadow);
+  transition: background 0.4s ease, box-shadow 0.3s ease;
+}
+
+/* ---------- CARD 1: GREETING ---------- */
+.card-greeting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--greeting-gradient);
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.greeting-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.greeting-text {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.88;
+  letter-spacing: 0.5px;
+}
+
+.user-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.btn-edit {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-edit:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.name-edit-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.name-input {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+  width: 220px;
+  transition: box-shadow 0.2s;
+}
+
+.name-input:focus {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+.greeting-right {
+  text-align: right;
+}
+
+.time-display {
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.date-display {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ---------- Middle Row Layout ---------- */
+.card-middle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ---------- Card Header (shared) ---------- */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  font-size: 1.4rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* ---------- CARD 2: TIMER ---------- */
+.card-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.card-timer .card-header {
+  width: 100%;
+}
+
+.timer-mode-tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--mode-tab-bg);
+  padding: 5px;
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 7px 4px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background 0.2s, color 0.2s;
+}
+
+.mode-tab.active {
+  background: var(--mode-tab-active);
+  color: var(--mode-tab-active-text);
+  box-shadow: 0 2px 8px rgba(108,99,255,0.25);
+}
+
+.mode-tab:hover:not(.active) {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.timer-display {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 3px;
+  font-variant-numeric: tabular-nums;
+  background: var(--timer-bg);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid var(--progress-bg);
+  position: relative;
+  margin-bottom: 16px;
+  transition: border-color 0.3s;
+}
+
+.timer-display.running {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(108, 99, 255, 0.25);
+}
+
+.timer-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--progress-bg);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.timer-progress-fill {
+  height: 100%;
+  background: var(--progress-fill);
+  border-radius: 99px;
+  width: 100%;
+  transition: width 1s linear;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.timer-session-info {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+  font-weight: 400;
+}
+
+/* ---------- CARD 3: TO-DO ---------- */
+.card-todo {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-todo .card-header {
+  margin-bottom: 16px;
+}
+
+.todo-counter {
+  font-size: 0.78rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.todo-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.todo-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+}
+
+.duplicate-warning {
+  font-size: 0.8rem;
+  color: var(--warning);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+  flex: 1;
+}
+
+/* Custom scrollbar */
+.todo-list::-webkit-scrollbar {
+  width: 4px;
+}
+.todo-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--input-bg);
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  transition: opacity 0.2s, background 0.2s;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.todo-item.done {
+  opacity: 0.6;
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: text-decoration 0.2s, color 0.2s;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: var(--todo-done-text);
+}
+
+.todo-delete {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.todo-delete:hover {
+  background: var(--danger-hover);
+  transform: scale(1.1);
+}
+
+.todo-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- CARD 4: QUICK LINKS ---------- */
+.card-links {
+  /* full width by default */
+}
+
+.links-add-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+
+.link-input {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.link-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+}
+
+.link-warning {
+  font-size: 0.8rem;
+  color: var(--warning);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px 10px;
+  background: var(--link-btn-bg);
+  border: 1.5px solid var(--link-btn-border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--link-btn-text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  position: relative;
+  animation: slideIn 0.25s ease;
+  word-break: break-word;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(108,99,255,0.18);
+  background: var(--accent-light);
+}
+
+.link-favicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+.link-delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.link-card:hover .link-delete-btn {
+  opacity: 1;
+}
+
+.link-delete-btn:hover {
+  background: var(--danger-hover);
+}
+
+.links-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 24px 0 8px;
+}
+
+/* ---------- Shared Buttons ---------- */
+.btn {
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(108,99,255,0.3);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 5px 18px rgba(108,99,255,0.4);
+}
+
+.btn-secondary {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background: #ddd9ff;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-save {
+  background: var(--success);
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+}
+
+.btn-save:hover {
+  background: #27ae60;
+}
+
+.btn-cancel {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+}
+
+.btn-cancel:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 2px 4px;
+  transition: color 0.2s;
+}
+
+.btn-text:hover {
+  color: var(--danger);
+}
+
+/* ---------- Utility ---------- */
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  body {
+    padding: 14px 12px 32px;
+  }
+
+  .card {
+    padding: 22px 20px;
+  }
+
+  .card-greeting {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .greeting-right {
+    text-align: left;
+  }
+
+  .time-display {
+    font-size: 2.4rem;
+  }
+
+  .user-name {
+    font-size: 1.6rem;
+  }
+
+  .card-middle-row {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-display {
+    font-size: 3.8rem;
+    width: 170px;
+    height: 170px;
+  }
+
+  .links-add-form {
+    flex-direction: column;
+  }
+
+  .link-input {
+    width: 100%;
+  }
+
+  .timer-controls {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .time-display {
+    font-size: 2rem;
+  }
+
+  .links-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .todo-input-group {
+    flex-direction: column;
+  }
+}

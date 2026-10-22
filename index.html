@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
+    <span class="theme-icon" id="themeIcon">🌙</span>
+  </button>
+
+  <div class="dashboard-container">
+
+    <!-- ===== CARD 1: GREETING & TIME (Full Width) ===== -->
+    <div class="card card-greeting">
+      <div class="greeting-left">
+        <p class="greeting-text" id="greetingText">Good Morning</p>
+        <div class="user-name-wrapper">
+          <h1 class="user-name" id="userNameDisplay">User!</h1>
+          <button class="btn-edit" id="btnEditName" title="Edit Nama">✏️</button>
+        </div>
+        <div class="name-edit-form hidden" id="nameEditForm">
+          <input type="text" id="nameInput" class="name-input" placeholder="Masukkan namamu..." maxlength="30" />
+          <button class="btn btn-save" id="btnSaveName">Simpan</button>
+          <button class="btn btn-cancel" id="btnCancelName">Batal</button>
+        </div>
+      </div>
+      <div class="greeting-right">
+        <div class="time-display" id="timeDisplay">00:00:00</div>
+        <div class="date-display" id="dateDisplay">Senin, 1 Januari 2025</div>
+      </div>
+    </div>
+
+    <!-- ===== CARD 2 & 3: MIDDLE ROW ===== -->
+    <div class="card-middle-row">
+
+      <!-- CARD 2: FOCUS TIMER (Pomodoro) -->
+      <div class="card card-timer">
+        <div class="card-header">
+          <span class="card-icon">⏱️</span>
+          <h2 class="card-title">Focus Timer</h2>
+        </div>
+        <div class="timer-mode-tabs">
+          <button class="mode-tab active" data-mode="pomodoro" id="tabPomodoro">Pomodoro</button>
+          <button class="mode-tab" data-mode="short" id="tabShort">Short Break</button>
+          <button class="mode-tab" data-mode="long" id="tabLong">Long Break</button>
+        </div>
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-progress-bar">
+          <div class="timer-progress-fill" id="timerProgressFill"></div>
+        </div>
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="btnStart">▶ Start</button>
+          <button class="btn btn-secondary" id="btnStop">⏸ Stop</button>
+          <button class="btn btn-outline" id="btnReset">↺ Reset</button>
+        </div>
+        <p class="timer-session-info" id="timerSessionInfo">Sesi ke-1 · Fokus!</p>
+      </div>
+
+      <!-- CARD 3: TO-DO LIST -->
+      <div class="card card-todo">
+        <div class="card-header">
+          <span class="card-icon">✅</span>
+          <h2 class="card-title">To-Do List</h2>
+          <span class="todo-counter" id="todoCounter">0 tugas</span>
+        </div>
+        <div class="todo-input-group">
+          <input type="text" id="todoInput" class="todo-input" placeholder="Tambah tugas baru..." maxlength="80" />
+          <button class="btn btn-primary" id="btnAddTodo">+ Tambah</button>
+        </div>
+        <p class="duplicate-warning hidden" id="duplicateWarning">⚠️ Tugas sudah ada dalam daftar!</p>
+        <ul class="todo-list" id="todoList">
+          <!-- Items rendered by JS -->
+        </ul>
+        <div class="todo-footer" id="todoFooter">
+          <button class="btn-text" id="btnClearDone">Hapus Selesai</button>
+        </div>
+      </div>
+
+    </div><!-- end card-middle-row -->
+
+    <!-- ===== CARD 4: QUICK LINKS (Full Width) ===== -->
+    <div class="card card-links">
+      <div class="card-header">
+        <span class="card-icon">🔗</span>
+        <h2 class="card-title">Quick Links</h2>
+      </div>
+      <div class="links-add-form">
+        <input type="text" id="linkNameInput" class="link-input" placeholder="Nama Link (contoh: GitHub)" maxlength="30" />
+        <input type="url" id="linkUrlInput" class="link-input" placeholder="URL (contoh: https://github.com)" />
+        <button class="btn btn-primary" id="btnAddLink">+ Tambah Link</button>
+      </div>
+      <p class="link-warning hidden" id="linkWarning">⚠️ Nama dan URL tidak boleh kosong!</p>
+      <div class="links-grid" id="linksGrid">
+        <!-- Links rendered by JS -->
+      </div>
+      <p class="links-empty hidden" id="linksEmpty">Belum ada link tersimpan. Tambahkan link favoritmu!</p>
+    </div>
+
+  </div><!-- end dashboard-container -->
+
+  <script src="js/script.js"></script>
+</body>
+</html>
